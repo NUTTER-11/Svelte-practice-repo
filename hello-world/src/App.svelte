@@ -33,22 +33,39 @@
 		skill: [],
 		experience: "",
 	};
-	function submitform(event){
-		event.preventDefault()
-		console.log(formvalues)
+	function submitform(event) {
+		event.preventDefault();
+		console.log(formvalues);
 	}
 
-	let firstname='Bruce'
-	let lastname='Wayne'
-	$: fullname =`${firstname} ${lastname}`
+	let firstname = "Bruce";
+	let lastname = "Wayne";
+	$: fullname = `${firstname} ${lastname}`;
 
 	let items = [
-		{ id: 1, title: "Wayne" ,price:100},
-		{ id: 2, title: "Kent" ,price:200},
-		{ id: 3, title: "Diana" ,price:300},
+		{ id: 1, title: "Wayne", price: 100 },
+		{ id: 2, title: "Kent", price: 200 },
+		{ id: 3, title: "Diana", price: 300 },
 	];
 
-	$:total=items.reduce((total,curr)=>(total=total+curr.price),0)
+	$: total = items.reduce((total, curr) => (total = total + curr.price), 0);
+	$: {
+		console.log(`FullName is ${firstname} ${lastname}`);
+	}
+
+	$: {
+		const greet = `FullName is ${firstname} ${lastname}`;
+		console.log(greet);
+	}
+
+	let volume = 0;
+	$: if(volume<0){
+		alert('Volume cantbe less then 0')
+		volume=0
+	}else if(volume>100){
+		alert('volume cant go heigher')
+		volume=100
+	}
 </script>
 
 <main>
@@ -186,16 +203,27 @@
 	</form>
 
 	<div>
-	<button on:click={()=>{firstname='clark',lastname='kent'}}>onclick Change the name </button>
+		<button
+			on:click={() => {
+				(firstname = "clark"), (lastname = "kent");
+			}}
+			>onclick Change the name
+		</button>
 		<h1>{firstname} {lastname}</h1>
 		<h2>{fullname}</h2>
-		<button on:click={()=>(items = [...items,{id:4,title:'keyboard',price:400}])}>add item in array</button>
+		<button
+			on:click={() =>
+				(items = [...items, { id: 4, title: "keyboard", price: 400 }])}
+			>add item in array</button
+		>
 	</div>
 	<div>
-		Total  - {items.reduce((total,curr)=>(total=total+curr.price),0)}
+		Total - {items.reduce((total, curr) => (total = total + curr.price), 0)}
 		totall = {total}
 	</div>
-
+	<h1>volume is {volume}</h1>
+	<button on:click={()=>(volume+=10)}>Increase volume </button>
+	<button on:click={()=>(volume-=10)}>Decrease volume </button>
 </main>
 
 <style>
