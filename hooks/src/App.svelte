@@ -5,6 +5,7 @@
 	import Tabb from "./components/Tabb.svelte";
 	import Tabc from "./components/Tabc.svelte";
 	import Counter, { getTotalcount } from "./components/counter.svelte";
+    import Postlistpost from "./components/postlistpost.svelte";
 	export let name;
 	let activetab = Taba;
 </script>
@@ -36,7 +37,8 @@
 
 	<AutoFocus />
 
-	<Postlist></Postlist>
+	<!-- <Postlist></Postlist> -->
+	<Postlistpost></Postlistpost>
 </main>
 
 <style>
