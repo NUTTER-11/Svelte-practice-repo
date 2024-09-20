@@ -34,9 +34,7 @@
 	<Counter />
 	<Counter />
 	<h4>focus</h4>
-
 	<AutoFocus />
-
 	<!-- <Postlist></Postlist> -->
 	<Postlistpost></Postlistpost>
 </main>

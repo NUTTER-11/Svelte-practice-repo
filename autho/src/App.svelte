@@ -1,4 +1,6 @@
 <script>
+    import Signup from "./components/signup.svelte";
+
 	const formvalues = {
 		name: "",
 		email: "",
@@ -14,6 +16,7 @@
 </script>
 
 <main>
+	<Signup></Signup>
 	<form on:submit={signedup}>
 		<h1>Sign-Up</h1>
 		<div>
