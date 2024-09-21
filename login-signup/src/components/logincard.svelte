@@ -8,7 +8,7 @@
   } from "@smui/card";
   import Button, { Label } from "@smui/button";
 
-
+  import { navigate } from "svelte-routing";
 
   export let setActive;
   let clicked = 0;
@@ -25,23 +25,31 @@
 
     const loginvalues = { email, password };
 
-    const response = await fetch("http://localhost:3001/login-as-existing-user/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      "http://localhost:3001/login-as-existing-user/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginvalues),
       },
-      body: JSON.stringify(loginvalues),
-    });
+    );
 
     if (response.ok) {
-      const addedPost = await response.json();
-      User = [...User, addedPost];      
-      email = "";    
+      const data = await response.json();
+
+      const token = data.token;
+      if (token) {
+        localStorage.setItem("token", token);
+      }
+
+      email = "";
       password = "";
-      
+
+      navigate("/dashboard"); // Redirect to the dashboard
     } else {
-      /*  */
-      console.error("Failed to add post");
+      console.error("Failed to login", response.status, response.statusText);
     }
   }
 </script>

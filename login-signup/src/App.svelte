@@ -1,10 +1,18 @@
 <script>
+    import Dashboard from "./components/dashboard.svelte";
   import Navbar from "./components/navbar.svelte";
+  import { Router, Route, Link } from "svelte-routing";
 </script>
 
-<main>
+
+<Router>
+  <Route path="/" component={Navbar} />
+  <Route path="/dashboard" component={Dashboard} />
+</Router>
+
+<!-- <main>
   <Navbar />
-</main>
+</main> -->
 
 <svelte:head>
   <!-- Fonts -->

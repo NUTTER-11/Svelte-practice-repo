@@ -13,16 +13,22 @@
     export let setActive;
     let clicked = 0;
     let User = [];
-    let first_name= "";
-    let email= "";
-    let phone= "";
-    let password= "";
-    let re_enter_password= "";
+    let first_name = "";
+    let email = "";
+    let phone = "";
+    let password = "";
+    let re_enter_password = "";
 
     async function signedup(event) {
         event.preventDefault();
 
-        const signupvalues = { first_name, email, phone, password, re_enter_password };
+        const signupvalues = {
+            first_name,
+            email,
+            phone,
+            password,
+            re_enter_password,
+        };
 
         const response = await fetch(
             "http://localhost:3001/create/new-profile",
@@ -42,8 +48,7 @@
             email = "";
             phone = "";
             password = "";
-            re_enter_password:"";
-
+            re_enter_password: "";
         } else {
             /*  */
             console.error("Failed to add post");
