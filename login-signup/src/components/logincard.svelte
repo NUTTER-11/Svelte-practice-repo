@@ -22,7 +22,7 @@
 
   async function logedin(event) {
     event.preventDefault();
-
+    // Create an object to hold the login values
     const loginvalues = { email, password };
 
     const response = await fetch(
@@ -32,16 +32,16 @@
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(loginvalues),
+        body: JSON.stringify(loginvalues), // Convert login values to a JSON string
       },
     );
 
     if (response.ok) {
       const data = await response.json();
 
-      const token = data.token;
+      const token = data.token; // Extract the token from the response
       if (token) {
-        localStorage.setItem("token", token);
+        localStorage.setItem("token", token); // Store the token in local storage
       }
 
       email = "";

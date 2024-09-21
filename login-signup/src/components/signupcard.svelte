@@ -12,16 +12,19 @@
 
     export let setActive;
     let clicked = 0;
+
+    // Variables to hold user input data
     let User = [];
     let first_name = "";
     let email = "";
     let phone = "";
     let password = "";
     let re_enter_password = "";
-
+    //a function created for sending the data to data base this function starts when signedup is called
     async function signedup(event) {
+        // Prevent default form submission behavior
         event.preventDefault();
-
+        // Create an object to hold the signup values
         const signupvalues = {
             first_name,
             email,
@@ -29,28 +32,30 @@
             password,
             re_enter_password,
         };
-
+        // Send a POST request to the server to create a new profile
         const response = await fetch(
             "http://localhost:3001/create/new-profile",
             {
-                method: "POST",
+                method: "POST", //method is specified
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json", // Set the content type to JSON
                 },
-                body: JSON.stringify(signupvalues),
+                body: JSON.stringify(signupvalues), // Convert the signup values to a JSON string
             },
         );
-
+        // Check if the response is successful
         if (response.ok) {
-            const addedPost = await response.json();
+            const addedPost = await response.json(); // Parse the JSON response
+            // Add the new user to the User array
             User = [...User, addedPost];
+            // Clear input fields after successful signup
             first_name = "";
             email = "";
             phone = "";
             password = "";
-            re_enter_password: "";
+            re_enter_password = "";
         } else {
-            /*  */
+            // Log an error if the signup fails
             console.error("Failed to add post");
         }
     }
